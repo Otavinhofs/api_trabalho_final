@@ -4,7 +4,7 @@ let listaLivros = []
 let id = 1
 
 async function inserir(livro) {
-    if (livro && livro.cpf && livro.nome && livro.telefone) {
+    if (livro && livro.nome && livro.autor && livro.ano) {
         try {
             const livroInserido = await livroPersistencia.inserir(livro);
             return livroInserido
@@ -45,7 +45,7 @@ async function buscarPorId(id) {
 }
 
 async function atualizar(id, novoLivro) {
-    if(novoLivro && novoLivro.cpf && novoLivro.nome && novoLivro.telefone) {
+    if(novoLivro && novoLivro.nome && novoLivro.autor && novoLivro.ano) {
         try {
             const livroAtualizado = await livroPersistencia.atualizar(id, novoLivro)
             if(!livroAtualizado) {
