@@ -2,16 +2,16 @@ const {Client} = require("pg")
 
 const conexao = {
     host: 'localhost',
-    port: 5433,
-    database: 'fintech',
+    port: 5432,
+    database: 'biblioteca',
     user: 'postgres',
     password: '123456'
 }
 
 async function inserir(livro) {
     const livroConexao = new Client(conexao)
-    const sql = "INSERT INTO livros(nome, autor, ano) VALUES($1,$2,$3) RETURNING *"
-    const values = [livro.nome, livro.autor, livro.ano]
+    const sql = "INSERT INTO livros(id, nome, autor, ano) VALUES($1,$2,$3,$4) RETURNING *"
+    const values = [livro.id, livro.nome, livro.autor, livro.ano]
     livroConexao.connect()
     try {
         const resultado = await livroConexao.query(sql, values)
