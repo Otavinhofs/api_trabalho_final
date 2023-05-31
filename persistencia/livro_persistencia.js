@@ -2,7 +2,7 @@ const {Client} = require("pg")
 
 const conexao = {
     host: 'localhost',
-    port: 5432,
+    port: 5433,
     database: 'biblioteca',
     user: 'postgres',
     password: '123456'
@@ -59,6 +59,23 @@ async function buscarPorId(id) {
     }
 }
 
+async function buscarPorAutor(autor) {
+    const livro = new Client(conexao)
+    const sql = "SELECT * FROM livros WHERE autor=$1"
+    const values = [autor]
+    livro.connect()
+    try {
+        const resultado = await livro.query(sql, values)
+        //fechar a conexao
+        livro.end()
+        //trabalhar com o resultado.
+        return resultado.rows[0]
+    }
+    catch(err){
+        throw err
+    }
+}
+
 async function atualizar(id, livro) {
     const livroConexao = new Client(conexao)
     const sql = "UPDATE livros SET nome=$1, autor=$2, ano=$3 WHERE id=$4  RETURNING *"
@@ -96,5 +113,6 @@ module.exports = {
     buscarPorId, 
     inserir, 
     atualizar, 
-    deletar
+    deletar,
+    buscarPorAutor
 }

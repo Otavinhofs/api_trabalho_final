@@ -6,3 +6,24 @@ create table livros (
     autor varchar,
     ano integer
 );
+
+{
+  "id":1,
+  "nome":"A Sociedade do Anel",
+  "autor":"J.R.R. Tolkien",
+  "ano":1954
+}
+
+{
+  "id":2,
+  "nome":"Harry Potter e o Prisioneiro de Azkaban",
+  "autor":"J.K. Rowling",
+  "ano":2003
+}
+
+{
+  "id":3,
+  "nome":"Capitães da Areia",
+  "autor":"Jorge Amado",
+  "ano":1937
+}

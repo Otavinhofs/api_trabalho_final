@@ -43,6 +43,21 @@ async function buscarPorId(id) {
     }
 }
 
+async function buscarPorAutor(autor) {
+    try { 
+        const livro = await livroPersistencia.buscarPorAutor(autor)
+        if(!livro) {
+            let erro = new Error()
+            erro.message = "Livro não encontrado"
+            erro.status = 404
+            throw erro
+        }
+        return livro
+    } catch(err) {
+        throw err
+    }
+}
+
 async function atualizar(id, novoLivro) {
     if(novoLivro && novoLivro.id && novoLivro.nome && novoLivro.autor && novoLivro.ano) {
         try {
@@ -59,7 +74,7 @@ async function atualizar(id, novoLivro) {
         }
     } else {
         const erro = new Error()
-        erro.message = "Falta parametros no cliente"
+        erro.message = "Falta parametros no livro"
         erro.status = 400
         throw erro
     }
@@ -85,5 +100,6 @@ module.exports = {
     inserir, 
     buscarPorId, 
     deletar, 
-    atualizar
+    atualizar,
+    buscarPorAutor
 }
