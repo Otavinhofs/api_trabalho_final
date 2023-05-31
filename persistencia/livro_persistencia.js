@@ -61,7 +61,7 @@ async function buscarPorId(id) {
 
 async function buscarPorAutor(autor) {
     const livro = new Client(conexao)
-    const sql = "SELECT * FROM livros WHERE autor=$1"
+    const sql = "SELECT * FROM livros WHERE autor=$3"
     const values = [autor]
     livro.connect()
     try {
