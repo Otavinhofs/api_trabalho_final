@@ -1,0 +1,8 @@
+create database biblioteca;
+
+create table livros (
+    id integer primary key,
+    nome varchar,
+    autor varchar,
+    ano integer
+);
