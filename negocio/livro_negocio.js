@@ -8,8 +8,7 @@ async function inserir(livro) {
         try {
             const livroInserido = await livroPersistencia.inserir(livro);
             return livroInserido
-        }
-        catch(err) { 
+        } catch(err) { 
             throw err 
         }
     } else {

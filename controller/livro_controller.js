@@ -35,8 +35,7 @@ async function buscarPorId(req, res) {
         const livro = await livroNegocio.buscarPorId(id)
         //Gera o response adequadamente  
         res.json(livro)
-    }
-    catch(err) {
+    } catch(err) {
         if (err.status) {
             res.status(err.status).json(err)
         } else {
@@ -55,8 +54,7 @@ async function atualizar(req, res) {
         const livroAtualizado = await livroNegocio.atualizar(id, livro)
         //Gera o response adequadamente  
         res.json(livroAtualizado)
-    } 
-    catch (err) {
+    } catch (err) {
         if (err.status) {
             res.status(err.status).json(err)
         } else {
