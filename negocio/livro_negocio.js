@@ -1,7 +1,5 @@
 const livroPersistencia = require("../persistencia/livro_persistencia")
 
-let listaLivros = []
-
 async function inserir(livro) {
     if (livro && livro.id && livro.nome && livro.autor && livro.ano) {
         try {
@@ -18,7 +16,7 @@ async function inserir(livro) {
     }
 }
 
-async function listar() { 
+async function listar() {
     try { 
         const listaLivros = await livroPersistencia.listar()
         return listaLivros
