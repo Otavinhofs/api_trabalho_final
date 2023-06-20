@@ -32,10 +32,8 @@ async function listar() {
         const sql = "SELECT * FROM livros"
         //Fazer a conexao
         livro.connect()
-        console.log('conection')
         //Realizar a query
         const resultado = await livro.query(sql)
-        console.log(resultado)
         //fechar a conexao
         livro.end()
         //trabalhar com o resultado.
