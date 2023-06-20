@@ -2,7 +2,7 @@ const {Client} = require("pg")
 
 const conexao = {
     host: 'localhost',
-    port: 5433,
+    port: 5432,
     database: 'biblioteca',
     user: 'postgres',
     password: '123456'
@@ -25,14 +25,17 @@ async function inserir(livro) {
 }
 
 async function listar() {
-    //instanciar Client
-    const livro = new Client(conexao)
-    const sql = "SELECT * FROM livros"
-    //Fazer a conexao
-    livro.connect()
-    //Realizar a query
+    
     try {
+        //instanciar Client
+        const livro = new Client(conexao)
+        const sql = "SELECT * FROM livros"
+        //Fazer a conexao
+        livro.connect()
+        console.log('conection')
+        //Realizar a query
         const resultado = await livro.query(sql)
+        console.log(resultado)
         //fechar a conexao
         livro.end()
         //trabalhar com o resultado.

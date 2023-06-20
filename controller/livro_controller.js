@@ -22,6 +22,7 @@ async function listar(req, res) {
     //Trata a funcionalidade de negocio
     try {
         const listaLivros = await livroNegocio.listar()
+        res.status(200).json(listaLivros)
     } catch(err) {
         res.status(500).json({erro: err})
     }
