@@ -29,7 +29,7 @@ async function listar() {
     try {
         //instanciar Client
         const livro = new Client(conexao)
-        const sql = "SELECT * FROM livros"
+        const sql = "SELECT * FROM livros order by id"
         //Fazer a conexao
         livro.connect()
         //Realizar a query
