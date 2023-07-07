@@ -1,7 +1,7 @@
 const livroPersistencia = require("../persistencia/livro_persistencia")
 
 async function inserir(livro) {
-    if (livro && livro.id && livro.nome && livro.autor && livro.ano) {
+    if (livro && livro.id && livro.nome && livro.autor && livro.editora && livro.ano) {
         try {
             const livroInserido = await livroPersistencia.inserir(livro);
             return livroInserido
@@ -40,23 +40,8 @@ async function buscarPorId(id) {
     }
 }
 
-async function buscarPorAutor(autor) {
-    try { 
-        const livro = await livroPersistencia.buscarPorAutor(autor)
-        if(!livro) {
-            let erro = new Error()
-            erro.message = "Livro não encontrado"
-            erro.status = 404
-            throw erro
-        }
-        return livro
-    } catch(err) {
-        throw err
-    }
-}
-
 async function atualizar(id, novoLivro) {
-    if(novoLivro && novoLivro.id && novoLivro.nome && novoLivro.autor && novoLivro.ano) {
+    if(novoLivro && novoLivro.id && novoLivro.nome && novoLivro.autor && novoLivro.editora && novoLivro.ano) {
         try {
             const livroAtualizado = await livroPersistencia.atualizar(id, novoLivro)
             if(!livroAtualizado) {
@@ -97,6 +82,5 @@ module.exports = {
     inserir, 
     buscarPorId, 
     deletar, 
-    atualizar,
-    buscarPorAutor
+    atualizar
 }

@@ -45,23 +45,6 @@ async function buscarPorId(req, res) {
     }
 }
 
-async function buscarPorAutor(req, res) {    
-    //Obtem os dados request (e da URI)
-    const autor = req.params.autor;
-    try{ 
-        //Trata a funcionalidade de negocio
-        const livro = await livroNegocio.buscarPorAutor(autor)
-        //Gera o response adequadamente  
-        res.json(livro)
-    } catch(err) {
-        if (err.status) {
-            res.status(err.status).json(err)
-        } else {
-            res.status(500).json({message: "Erro nao identificado"})
-        }
-    }
-}
-
 async function atualizar(req, res) {    
     //Obtem os dados request
     const id = req.params.id
@@ -103,6 +86,5 @@ module.exports = {
     buscarPorId,
     inserir,
     atualizar,
-    deletar,
-    buscarPorAutor
+    deletar
 }

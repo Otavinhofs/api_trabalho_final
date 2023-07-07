@@ -7,7 +7,6 @@ const router = express.Router()
 router.post('/', livroController.inserir)
 router.get('/', livroController.listar)
 router.get('/:id', livroController.buscarPorId)
-router.get('/:autor', livroController.buscarPorAutor)
 router.put('/:id', livroController.atualizar)
 router.delete('/:id', livroController.deletar)
 

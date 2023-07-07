@@ -10,8 +10,8 @@ const conexao = {
 
 async function inserir(livro) {
     const livroConexao = new Client(conexao)
-    const sql = "INSERT INTO livros(id, nome, autor, ano) VALUES($1,$2,$3,$4) RETURNING *"
-    const values = [livro.id, livro.nome, livro.autor, livro.ano]
+    const sql = "INSERT INTO livros(id, nome, autor, editora, ano) VALUES($1,$2,$3,$4,$5) RETURNING *"
+    const values = [livro.id, livro.nome, livro.autor, livro.editora, livro.ano]
     livroConexao.connect()
     try {
         const resultado = await livroConexao.query(sql, values)
@@ -60,27 +60,10 @@ async function buscarPorId(id) {
     }
 }
 
-async function buscarPorAutor(autor) {
-    const livro = new Client(conexao)
-    const sql = "SELECT * FROM livros WHERE autor=$3"
-    const values = [autor]
-    livro.connect()
-    try {
-        const resultado = await livro.query(sql, values)
-        //fechar a conexao
-        livro.end()
-        //trabalhar com o resultado.
-        return resultado.rows[0]
-    }
-    catch(err){
-        throw err
-    }
-}
-
 async function atualizar(id, livro) {
     const livroConexao = new Client(conexao)
-    const sql = "UPDATE livros SET nome=$1, autor=$2, ano=$3 WHERE id=$4  RETURNING *"
-    const values = [livro.nome, livro.autor, livro.ano, id]
+    const sql = "UPDATE livros SET nome=$1, autor=$2, ano=$3, editora=$4 WHERE id=$5  RETURNING *"
+    const values = [livro.nome, livro.autor, livro.ano, livro.editora, id]
     livroConexao.connect()
     try {
         const resultado = await livroConexao.query(sql,values)
@@ -114,6 +97,5 @@ module.exports = {
     buscarPorId, 
     inserir, 
     atualizar, 
-    deletar,
-    buscarPorAutor
+    deletar
 }
