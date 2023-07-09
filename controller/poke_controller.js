@@ -1,13 +1,11 @@
-const livroNegocio = require("../negocio/livro_negocio")
+const pokeNegocio = require("../negocio/poke_negocio")
 
 async function inserir(req, res) {    
-    //Obtem os dados request
-    const livro = req.body
-    //Trata a funcionalidade de negocio
+    const pokemon = req.body
     try { 
-        const livroInserido = await livroNegocio.inserir(livro)
-        //Gera o response adequadamente  
-        res.status(201).json(livroInserido);
+        const pokemonInserido = await pokeNegocio.inserir(pokemon)
+
+        res.status(201).json(pokemonInserido);
     } catch (err) {
         if (err.status) {
             res.status(err.status).json(err)
@@ -18,24 +16,19 @@ async function inserir(req, res) {
 }
 
 async function listar(req, res) {    
-    //Obtem os dados request
-    //Trata a funcionalidade de negocio
     try {
-        const listaLivros = await livroNegocio.listar()
-        res.status(200).json(listaLivros)
+        const listaPokemons = await pokeNegocio.listar()
+        res.status(200).json(listaPokemons)
     } catch(err) {
         res.status(500).json({erro: err})
     }
 }
 
-async function buscarPorId(req, res) {    
-    //Obtem os dados request (e da URI)
+async function buscaId(req, res) {    
     const id = req.params.id;
     try{ 
-        //Trata a funcionalidade de negocio
-        const livro = await livroNegocio.buscarPorId(id)
-        //Gera o response adequadamente  
-        res.json(livro)
+        const pokemon = await pokeNegocio.buscaId(id)
+        res.json(pokemon)
     } catch(err) {
         if (err.status) {
             res.status(err.status).json(err)
@@ -46,15 +39,12 @@ async function buscarPorId(req, res) {
 }
 
 async function atualizar(req, res) {    
-    //Obtem os dados request
     const id = req.params.id
-    const livro = req.body
+    const pokemon = req.body
 
-    //Trata a funcionalidade de negocio
     try{ 
-        const livroAtualizado = await livroNegocio.atualizar(id, livro)
-        //Gera o response adequadamente  
-        res.json(livroAtualizado)
+        const pokemonAtualizado = await pokeNegocio.atualizar(id, pokemon)
+        res.json(pokemonAtualizado)
     } catch (err) {
         if (err.status) {
             res.status(err.status).json(err)
@@ -65,13 +55,10 @@ async function atualizar(req, res) {
 }
 
 async function deletar(req, res) {    
-    //Obtem os dados request
     const id = req.params.id
     try{ 
-        //Trata a funcionalidade de negocio
-        const livro = await livroNegocio.deletar(id)
-        //Gera o response adequadamente  
-        res.json(livro)
+        const pokemon = await pokeNegocio.deletar(id)
+        res.json(pokemon)
     } catch(err) {
         if(err.status) {
             res.status(err.status).json(err)
@@ -83,7 +70,7 @@ async function deletar(req, res) {
 
 module.exports = {
     listar,
-    buscarPorId,
+    buscaId,
     inserir,
     atualizar,
     deletar
