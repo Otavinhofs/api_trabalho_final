@@ -1,6 +1,6 @@
-create database biblioteca;
+create database pokemons;
 
-create table livros (
+create table pokemons (
     id integer primary key,
     pokemon varchar,
     type varchar
